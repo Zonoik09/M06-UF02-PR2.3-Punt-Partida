@@ -3,13 +3,53 @@ package com.project.domain;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "autors")
 public class Autor implements Serializable {
-  
-    /*
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Clave primaria auto-generada
+    @Column(name = "autor_id")
+    private int autorId;
+
+    @Column(nullable = false, length = 100) // Nombre obligatorio con longitud máxima
+    private String nom;
+
+    @ManyToMany
+    @JoinTable(
+            name = "autors_llibres", // Tabla intermedia
+            joinColumns = @JoinColumn(name = "autor_id"),
+            inverseJoinColumns = @JoinColumn(name = "llibre_id")
+    )
+    private List<Llibre> llibres;
+
+    public int getAutorId() {
+        return autorId;
+    }
+
+    public void setAutorId(int autorId) {
+        this.autorId = autorId;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public List<Llibre> getLlibres() {
+        return llibres;
+    }
+
+    public void setLlibres(List<Llibre> llibres) {
+        this.llibres = llibres;
+    }
+
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -42,5 +82,7 @@ public class Autor implements Serializable {
     public int hashCode() {
         return Long.hashCode(autorId);
     }
-    */
+
+
+
 }
