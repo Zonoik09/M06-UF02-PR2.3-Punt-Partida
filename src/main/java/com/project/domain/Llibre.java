@@ -16,7 +16,7 @@ public class Llibre implements Serializable {
     private int llibreId;
 
     @Column(nullable = false, unique = true)
-    private int isbn;
+    private String isbn;
 
     @Column(length = 200, nullable = false)
     private String titol;
@@ -25,7 +25,7 @@ public class Llibre implements Serializable {
     private String editorial;
 
     @Column(length = 4)
-    private String anyPublicacio;
+    private int anyPublicacio;
 
     @ManyToMany
     @JoinTable(
@@ -46,11 +46,11 @@ public class Llibre implements Serializable {
         this.llibreId = llibreId;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -70,11 +70,11 @@ public class Llibre implements Serializable {
         this.editorial = editorial;
     }
 
-    public String getAnyPublicacio() {
+    public int getAnyPublicacio() {
         return anyPublicacio;
     }
 
-    public void setAnyPublicacio(String anyPublicacio) {
+    public void setAnyPublicacio(int anyPublicacio) {
         this.anyPublicacio = anyPublicacio;
     }
 
@@ -97,16 +97,16 @@ public class Llibre implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Llibre[id=%d, isbn='%s', titol='%s'", 
+        sb.append(String.format("Llibre[id=%d, isbn='%s', titol='%s'",
             llibreId, isbn, titol));
-        
+
         if (editorial != null) {
             sb.append(String.format(", editorial='%s'", editorial));
         }
-        if (anyPublicacio != null) {
+        if (anyPublicacio != 0) {
             sb.append(String.format(", any=%d", anyPublicacio));
         }
-        
+
         if (!autors.isEmpty()) {
             sb.append(", autors={");
             boolean first = true;
@@ -117,7 +117,7 @@ public class Llibre implements Serializable {
             }
             sb.append("}");
         }
-        
+
         if (!exemplars.isEmpty()) {
             sb.append(", exemplars={");
             boolean first = true;
@@ -128,7 +128,7 @@ public class Llibre implements Serializable {
             }
             sb.append("}");
         }
-        
+
         sb.append("]");
         return sb.toString();
     }

@@ -2,9 +2,11 @@ package com.project.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "persones")
@@ -77,7 +79,6 @@ public class Persona implements Serializable {
         this.prestecs = prestecs;
     }
 
-    /*
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -91,7 +92,7 @@ public class Persona implements Serializable {
             sb.append(String.format(", email='%s'", email));
         }
         
-        int prestecsActius = getNumPrestecsActius();
+        int prestecsActius = getPrestecs().size();
         if (prestecsActius > 0) {
             sb.append(String.format(", prestecsActius=%d", prestecsActius));
             if (tePrestecsRetardats()) {
@@ -101,6 +102,17 @@ public class Persona implements Serializable {
         
         sb.append("]");
         return sb.toString();
+    }
+
+    public List<Prestec> getPrestecsRetard() {
+        // Filtrar los préstamos que estén retrasados
+        return prestecs.stream()
+                .filter(prestec -> prestec.getDataRetornReal() == null && prestec.getDataRetornPrevista().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
+    }
+
+    private boolean tePrestecsRetardats() {
+        return !getPrestecsRetard().isEmpty();
     }
 
     @Override
@@ -115,5 +127,5 @@ public class Persona implements Serializable {
     public int hashCode() {
         return Long.hashCode(personaId);
     }
-    */
+
 }
