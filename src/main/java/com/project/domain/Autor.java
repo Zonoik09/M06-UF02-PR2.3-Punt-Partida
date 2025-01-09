@@ -23,7 +23,8 @@ public class Autor implements Serializable {
             joinColumns = @JoinColumn(name = "autor_id"),
             inverseJoinColumns = @JoinColumn(name = "llibre_id")
     )
-    private List<Llibre> llibres;
+    private Set<Llibre> llibres;
+
 
     public int getAutorId() {
         return autorId;
@@ -41,11 +42,11 @@ public class Autor implements Serializable {
         this.nom = nom;
     }
 
-    public List<Llibre> getLlibres() {
+    public Set<Llibre> getLlibres() {
         return llibres;
     }
 
-    public void setLlibres(List<Llibre> llibres) {
+    public void setLlibres(Set<Llibre> llibres) {
         this.llibres = llibres;
     }
 
@@ -54,7 +55,7 @@ public class Autor implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Autor[id=%d, nom='%s'", autorId, nom));
-        
+
         if (!llibres.isEmpty()) {
             sb.append(", llibres={");
             boolean first = true;
@@ -65,7 +66,7 @@ public class Autor implements Serializable {
             }
             sb.append("}");
         }
-        
+
         sb.append("]");
         return sb.toString();
     }

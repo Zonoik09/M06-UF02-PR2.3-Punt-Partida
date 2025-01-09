@@ -37,7 +37,6 @@ public class Main {
         Autor autorOrwell = Manager.addAutor("George Orwell");
         Autor autorWoolf = Manager.addAutor("Virginia Woolf");
 
-        /*
         // Comprovem que s'han creat els autors
         @SuppressWarnings("unchecked")
         Collection<Autor> autors = (Collection<Autor>) Manager.listCollection(Autor.class);
@@ -47,14 +46,14 @@ public class Main {
         // 4. Creem els llibres
         System.out.println("\n=== Creant llibres ===");
         Llibre llibre100 = Manager.addLlibre(
-            "978-0307474728", "Cien años de soledad",
-            "Vintage Español", 1967);
+                "978-0307474728", "Cien años de soledad",
+                "Vintage Español", 1967);
         Llibre llibre1984 = Manager.addLlibre(
-            "978-0451524935", "1984",
-            "Signet Classic", 1949);
+                "978-0451524935", "1984",
+                "Signet Classic", 1949);
         Llibre llibreDalloway = Manager.addLlibre(
-            "978-0156628709", "Mrs. Dalloway",
-            "Harvest Books", 1925);
+                "978-0156628709", "Mrs. Dalloway",
+                "Harvest Books", 1925);
 
         // Comprovem que s'han creat els llibres
         @SuppressWarnings("unchecked")
@@ -78,17 +77,17 @@ public class Main {
 
         // Comprovem les relacions autor-llibre
         System.out.println("Relacions autor-llibre establertes:");
-        System.out.println(Manager.collectionToString(Autor.class, 
-            (Collection<Autor>) Manager.listCollection(Autor.class)));
+        System.out.println(Manager.collectionToString(Autor.class,
+                (Collection<Autor>) Manager.listCollection(Autor.class)));
 
         // 6. Creem les biblioteques
         System.out.println("\n=== Creant biblioteques ===");
         Biblioteca bibCentre = Manager.addBiblioteca(
-            "Biblioteca Central", "Barcelona", 
-            "Carrer Central 123", "93123456", "central@biblio.cat");
+                "Biblioteca Central", "Barcelona",
+                "Carrer Central 123", "93123456", "central@biblio.cat");
         Biblioteca bibNord = Manager.addBiblioteca(
-            "Biblioteca Nord", "Barcelona", 
-            "Avinguda Nord 45", "93789012", "nord@biblio.cat");
+                "Biblioteca Nord", "Barcelona",
+                "Avinguda Nord 45", "93789012", "nord@biblio.cat");
 
         // Comprovem que s'han creat les biblioteques
         @SuppressWarnings("unchecked")
@@ -113,14 +112,14 @@ public class Main {
         // 8. Creem persones
         System.out.println("\n=== Creant usuaris ===");
         Persona persona1 = Manager.addPersona(
-            "11111111A", "Joan Garcia",
-            "666111222", "joan@email.com");
+                "11111111A", "Joan Garcia",
+                "666111222", "joan@email.com");
         Persona persona2 = Manager.addPersona(
-            "22222222B", "Maria Puig",
-            "666333444", "maria@email.com");
+                "22222222B", "Maria Puig",
+                "666333444", "maria@email.com");
         Persona persona3 = Manager.addPersona(
-            "33333333C", "Pere Soler",
-            "666555666", "pere@email.com");
+                "33333333C", "Pere Soler",
+                "666555666", "pere@email.com");
 
         // Comprovem que s'han creat les persones
         @SuppressWarnings("unchecked")
@@ -131,18 +130,18 @@ public class Main {
         // 9. Creem préstecs
         System.out.println("\n=== Creant préstecs ===");
         LocalDate avui = LocalDate.now();
-        
+
         System.out.println("Creant préstec actiu per a persona1...");
-        Prestec prestec1 = Manager.addPrestec(ex100_1, persona1, 
-            avui, avui.plusDays(15));
-        
+        Prestec prestec1 = Manager.addPrestec(ex100_1, persona1,
+                avui, avui.plusDays(15));
+
         System.out.println("Creant préstec actiu per a persona2...");
-        Prestec prestec2 = Manager.addPrestec(ex1984_1, persona2, 
-            avui.minusDays(5), avui.plusDays(10));
-        
+        Prestec prestec2 = Manager.addPrestec(ex1984_1, persona2,
+                avui.minusDays(5), avui.plusDays(10));
+
         System.out.println("Creant i retornant préstec per a persona3...");
-        Prestec prestec3 = Manager.addPrestec(exDall_1, persona3, 
-            avui.minusDays(20), avui.minusDays(5));
+        Prestec prestec3 = Manager.addPrestec(exDall_1, persona3,
+                avui.minusDays(20), avui.minusDays(5));
         Manager.registrarRetornPrestec(prestec3.getPrestecId(), avui.minusDays(7));
 
         // Comprovem l'estat dels préstecs
@@ -153,7 +152,7 @@ public class Main {
 
         // 10. Realitzem les consultes demanades
         System.out.println("\n=== Execució de les consultes específiques ===");
-        
+
         System.out.println("\nConsulta 1: Llibres amb els seus autors");
         List<Llibre> llibresAmbAutors = Manager.findLlibresAmbAutors();
         System.out.println(Manager.collectionToString(Llibre.class, llibresAmbAutors));
@@ -165,7 +164,6 @@ public class Main {
         System.out.println("\nConsulta 3: Llibres i les seves biblioteques");
         List<Object[]> llibresBiblios = Manager.findLlibresAmbBiblioteques();
         System.out.println(Manager.formatMultipleResult(llibresBiblios));
-        */
 
         // 11. Tanquem la connexió
         System.out.println("\n=== Finalitzant el programa ===");
